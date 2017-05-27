@@ -1,3 +1,5 @@
 #!/bin/bash
 
-ssh -o StrictHostKeyChecking=no core@172.17.42.1 $*
+host_ip=$(/sbin/ip route | awk '/default/ { print $3 }')
+
+ssh -o StrictHostKeyChecking=no core@$host_ip $*
