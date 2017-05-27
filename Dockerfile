@@ -1,10 +1,8 @@
-FROM ubuntu
+FROM ubuntu:xenial
 
-RUN apt-get update
-
-RUN apt-get install -q -y python-software-properties software-properties-common
-RUN add-apt-repository ppa:saltstack/salt
-RUN apt-get update -q && apt-get install -q -y salt-minion openssh-client
+RUN apt-get update -q \
+ && apt-get install -q -y salt-minion openssh-client \
+ && rm -rf /var/lib/apt/lists/*
 
 ADD run-on-host /usr/local/bin/run-on-host
 ADD entrypoint.sh /
